@@ -1,6 +1,20 @@
 <!DOCTYPE HTML>
 <html>
 <body>
-    <p>Hello World!</p>
+    <script>
+        const zeroPad = (num, places) => String(num).padStart(places, '0')
+        const formatDate = (date) => date.getFullYear() + "-" + zeroPad(date.getMonth() + 1, 2) + "-" + zeroPad(date.getDate(), 2)
+        const createLink = (d1, d2) => "https://guide.herzen.spb.ru/static/schedule_dates.php?id_group=14267&date1=" + d1 + "&date2=" + d2
+
+        function getDateFromThisWeek(numOfDays) {
+            const date = new Date();
+            const today = date.getDate();
+            const dayOfTheWeek = date.getDay() || 7;
+            const newDate = new Date(date.setDate(today - dayOfTheWeek + numOfDays + 1));
+            return formatDate(newDate);
+        }
+
+        window.location.replace(createLink(getDateFromThisWeek(0), getDateFromThisWeek(13)));
+    </script>
 </body>
 </html>
